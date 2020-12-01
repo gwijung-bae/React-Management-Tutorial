@@ -7,7 +7,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
+
 import { withStyles } from '@material-ui/core/styles';
+
 
 
 const styles = theme =>({
@@ -21,36 +23,26 @@ const styles = theme =>({
   }
 })
 
-const customers = [ 
-                    {
-                      'id' : 1,
-                      'image' : 'https://placeimg.com/64/64/1',
-                      'name' : '나귀정',
-                      'brithday' : '961222',
-                      'gender' : '남자',
-                      'job' : '대학생'
-                    },
-                    {
-                      'id' : 2,
-                      'image' : 'https://placeimg.com/64/64/2',
-                      'name' : '홍길동',
-                      'brithday' : '790428',
-                      'gender' : '남자',
-                      'job' : '프로그레머'
-                    },
-                    {
-                      'id' : 3,
-                      'image' : 'https://placeimg.com/64/64/3',
-                      'name' : '박나래',
-                      'brithday' : '951212',
-                      'gender' : '여자',
-                      'job' : '개그맨'
-                    }
-]
-
 
 class App extends Component{
+
+  state = {
+    customers: ""
+  }
   
+  componentDidMount(){
+    this.callApi()
+  
+    .then(res => this.setState({customers: res}))
+    .catch(err => console.log(err));
+  }
+
+  callApi =  async() => {
+    const response = await fetch('/api/customers');
+    const body = await response.json();
+    return body;
+  }
+
   render(){
     const { classes } = this.props;
     return(
@@ -67,7 +59,8 @@ class App extends Component{
             </TableRow>
           </TableHead>
           <TableBody>
-          { customers.map(c => { return(<Customer key={c.id} id={c.id} image={c.image} name={c.name} brithday={c.brithday}  gender={c.gender} job={c.job} />); }) }
+          {this.state.customers ? this.state.customers.map(c => { return(<Customer key={c.id} id={c.id} image={c.image} name={c.name} brithday={c.brithday}  gender={c.gender} job={c.job} />);
+           }) : ""}
           </TableBody>
         </Table>
         

@@ -1,8 +1,8 @@
 
 ## Management System - by gwijung.bae 2020-11-26
 본 프로젝트는 React 강의 목적으로 만들어진 고객 관리 시스템(Management System)입니다. 
-
-
+https://www.youtube.com/watch?v=_yEH9mczm3g&list=PLRx0vPvlEmdD1pSqKZiTihy5rplxecNpz
+- json 검증 사이트 : https://jsonlint.com/
 
 # Getting Started with Create React App
 
